@@ -1,0 +1,120 @@
+/* Print layout: 8.25 x 11 in trim (a common hardcover size on print-on-demand
+   services). Change the size and margins below for other trims. Margins
+   include a wider inside gutter for binding. */
+@page {
+  size: 8.25in 11in;
+  margin: 0.8in 0.65in 0.85in 0.65in;
+  @bottom-center { content: counter(page); font-family: "Carlito", "Calibri", "DejaVu Sans", sans-serif; font-size: 9pt; color: #444; }
+  @top-center { content: string(branch); font-family: "Carlito", "Calibri", "DejaVu Sans", sans-serif; font-size: 8.5pt; color: #555; letter-spacing: 0.04em; }
+}
+@page :left  { margin-left: 0.65in; margin-right: 0.9in; }
+@page :right { margin-left: 0.9in; margin-right: 0.65in; }
+@page :first { @top-center { content: none; } @bottom-center { content: none; } }
+@page front  { @top-center { content: none; } }
+
+:root { --serif: "Lora", "Georgia", "DejaVu Serif", serif; --sans: "Carlito", "Calibri", "DejaVu Sans", sans-serif; }
+
+html { font-family: var(--serif); font-size: 11pt; line-height: 1.42; color: #111; }
+body { margin: 0; }
+a { color: inherit; text-decoration: none; }
+h1, h2, h3, h4 { font-family: var(--serif); font-weight: 700; line-height: 1.2; }
+h4 { font-size: 11pt; margin: 1.1em 0 0.35em; border-bottom: 0.5pt solid #999; padding-bottom: 2pt; }
+
+/* cross references show the page number of the person's main entry */
+a.ref::after { content: " (p. " target-counter(attr(href), page) ")"; font-family: var(--sans); font-size: 8.5pt; color: #555; }
+.life { color: #444; font-size: 9.5pt; }
+.unknown { color: #777; font-style: italic; }
+
+/* title page */
+.title-page { page: front; text-align: center; padding-top: 2.6in; break-after: page; }
+.title-page h1 { font-size: 30pt; margin: 0 0 0.25in; }
+.title-page .subtitle { font-size: 15pt; font-style: italic; }
+.title-page .by { margin-top: 1.2in; font-size: 13pt; }
+.title-page .edition { font-family: var(--sans); font-size: 10.5pt; color: #444; }
+
+.front { page: front; break-after: page; }
+.front h2 { font-size: 18pt; }
+.toc ul { list-style: none; padding: 0; font-size: 12pt; }
+.toc li { margin: 0.35em 0; }
+.toc a::after { content: leader('.') target-counter(attr(href), page); }
+
+/* parts and branches */
+.part { break-before: page; }
+.part-title { string-set: branch content(); font-size: 24pt; margin: 0 0 0.2in; padding-bottom: 6pt; border-bottom: 1.5pt solid #222; }
+.branch-anchor { font-family: var(--sans); font-size: 11pt; }
+h2.gen { break-before: page; font-size: 15pt; margin: 0 0 0.1in; break-after: avoid; font-family: var(--sans); text-transform: uppercase; letter-spacing: 0.06em; color: #333; }
+
+/* pedigree chart */
+table.pedigree { width: 100%; border-collapse: collapse; margin: 0.2in 0; page-break-inside: avoid; table-layout: fixed; }
+table.pedigree td { vertical-align: middle; padding: 2pt 4pt; }
+table.pedigree .box { border: 0.75pt solid #333; padding: 3pt 5pt; font-size: 9pt; line-height: 1.2; min-height: 22pt; }
+table.pedigree .box.empty { border-style: dotted; border-color: #aaa; }
+table.pedigree .nm { display: block; font-weight: 700; }
+table.pedigree .ls { display: block; font-family: var(--sans); font-size: 8pt; color: #444; }
+table.pedigree td.g0 .box { font-size: 10pt; }
+
+/* person entries */
+.person { break-before: page; }
+h2.gen + .person { break-before: avoid; }
+.descendants h2.gen { break-before: avoid; }
+.person .ph { border-bottom: 1pt solid #222; margin-bottom: 0.12in; }
+.person .ph h3 { font-size: 19pt; margin: 0; }
+.person .ahn { float: right; font-family: var(--sans); font-size: 9.5pt; color: #444; margin-top: 6pt; }
+.person .dates { font-family: var(--sans); font-size: 11pt; color: #333; margin: 2pt 0 4pt; }
+.cols { display: flex; gap: 0.18in; align-items: flex-start; }
+.portrait { flex: 0 0 2.3in; margin: 0; }
+.portrait img { width: 2.3in; border: 0.5pt solid #555; }
+figcaption { font-family: var(--sans); font-size: 8.5pt; color: #333; margin-top: 2pt; }
+figcaption.flag { color: #8a1c1c; font-weight: 700; }
+.facts { flex: 1; }
+table.vital, table.events { border-collapse: collapse; width: 100%; font-size: 10.5pt; }
+table.vital th, table.events th { text-align: left; font-family: var(--sans); font-weight: 700; width: 1.15in; vertical-align: top; padding: 2pt 6pt 2pt 0; }
+table.vital td, table.events td { vertical-align: top; padding: 2pt 4pt 2pt 0; }
+.det { font-size: 9.5pt; color: #333; }
+.rel { margin: 0.35em 0; font-size: 10.5pt; }
+.kids { padding-left: 0.15in; }
+.story { margin: 0.15in 0; text-align: justify; hyphens: auto; }
+.story blockquote { margin: 0.6em 0.3in; font-style: italic; }
+table.census { border-collapse: collapse; width: 100%; font-size: 9.5pt; }
+table.census th { font-family: var(--sans); text-align: left; border-bottom: 0.75pt solid #333; padding: 2pt 4pt; }
+table.census td { border-bottom: 0.25pt solid #bbb; padding: 2pt 4pt; vertical-align: top; }
+.cit { font-family: var(--sans); font-size: 8pt; color: #555; }
+.note { font-size: 10pt; white-space: pre-line; }
+.gallery { display: flex; flex-wrap: wrap; gap: 0.12in; margin-top: 0.12in; }
+.gallery figure { margin: 0; width: 1.75in; break-inside: avoid; }
+.gallery img { width: 1.75in; border: 0.5pt solid #777; }
+.sources { margin-top: 0.15in; font-family: var(--sans); font-size: 8.5pt; color: #333; }
+
+/* writer's prompts: draft builds only */
+.prompts { background: #ececec; border-left: 2.5pt solid #777; padding: 5pt 8pt; margin: 0.12in 0; font-family: var(--sans); font-size: 9pt; break-inside: avoid; }
+.prompts .pl { font-weight: 700; text-transform: uppercase; font-size: 8pt; letter-spacing: 0.05em; color: #444; }
+.prompts ul { margin: 3pt 0 0; padding-left: 12pt; }
+.draftnote { background: #ececec; padding: 6pt 8pt; font-family: var(--sans); font-size: 9.5pt; }
+.review img { outline: 2pt dashed #8a1c1c; }
+body.final .review img { outline: none; }
+
+/* descendant register */
+.descendants { break-before: page; }
+ol.register { list-style: none; padding-left: 0.22in; margin: 0; }
+ol.register.top { padding-left: 0; }
+ol.register li { margin: 3pt 0; font-size: 10pt; break-inside: avoid-page; }
+.rl { font-family: var(--sans); font-size: 8.5pt; color: #555; margin-right: 4pt; }
+.rf { font-size: 9.5pt; color: #333; }
+.sp { padding-left: 0.3in; font-size: 9.5pt; }
+
+/* back matter */
+.cols2 { columns: 2; font-size: 10pt; }
+.cols3 { columns: 3; font-size: 9.5pt; }
+table.stats { border-collapse: collapse; font-size: 10pt; }
+table.stats th { text-align: left; padding: 2pt 12pt 2pt 0; font-family: var(--sans); }
+.corrections { margin-top: 0.25in; font-style: italic; }
+.index { columns: 2; column-gap: 0.3in; font-size: 9pt; }
+.index h3 { font-size: 12pt; margin: 0.4em 0 0.15em; break-after: avoid; }
+.ix a::after { content: leader('.') target-counter(attr(href), page); }
+
+/* screen preview of book.html */
+@media screen {
+  body { max-width: 7in; margin: 0.5in auto; padding: 0 16px; }
+  .person, .part, .front, .title-page { border-top: 1px dashed #bbb; padding-top: 0.3in; }
+  a.ref::after, .toc a::after, .ix a::after { content: ""; }
+}

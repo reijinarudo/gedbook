@@ -1,0 +1,371 @@
+0 HEAD
+1 SOUR gedbook-sample
+2 NAME Fictional sample tree for gedbook
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 NOTE Every person, place detail, and citation in this file is invented for testing.
+0 @S1@ SOUR
+1 TITL 1900 United States Federal Census
+0 @S2@ SOUR
+1 TITL 1910 United States Federal Census
+0 @S3@ SOUR
+1 TITL 1920 United States Federal Census
+0 @S4@ SOUR
+1 TITL 1930 United States Federal Census
+0 @S5@ SOUR
+1 TITL 1940 United States Federal Census
+0 @S6@ SOUR
+1 TITL U.S., World War I Draft Registration Cards, 1917-1918
+0 @S7@ SOUR
+1 TITL Alabama, Deaths and Burials Index (sample)
+0 @S8@ SOUR
+1 TITL Family Bible of Ruth Pruitt Hollis (sample)
+0 @I1@ INDI
+1 NAME Jordan Avery /Hollis/
+1 SEX M
+1 BIRT
+2 DATE 14 MAR 1988
+2 PLAC Chicago, Cook, Illinois, USA
+1 FAMC @F1@
+0 @I2@ INDI
+1 NAME Kendra Lynn /Hollis/
+1 SEX F
+1 BIRT
+2 DATE 2 AUG 1991
+2 PLAC Chicago, Cook, Illinois, USA
+1 FAMC @F1@
+0 @I3@ INDI
+1 NAME Marcus Walter /Hollis/
+1 SEX M
+1 BIRT
+2 DATE 9 JAN 1958
+2 PLAC Chicago, Cook, Illinois, USA
+1 OCCU Electrical engineer
+1 FAMC @F2@
+1 FAMS @F1@
+0 @I4@ INDI
+1 NAME Denise Marie /Merriweather/
+1 SEX F
+1 BIRT
+2 DATE 30 OCT 1961
+2 PLAC Opelousas, St. Landry, Louisiana, USA
+1 FAMC @F3@
+1 FAMS @F1@
+0 @I5@ INDI
+1 NAME Walter James /Hollis/
+1 SEX M
+1 BIRT
+2 DATE 22 JUN 1929
+2 PLAC Montgomery, Montgomery, Alabama, USA
+1 DEAT
+2 DATE 4 FEB 2004
+2 PLAC Chicago, Cook, Illinois, USA
+1 RESI
+2 DATE 1930
+2 PLAC Montgomery, Montgomery, Alabama, USA
+2 AGE 0
+2 NOTE Listed as son in the household of Samuel Hollis.
+2 SOUR @S4@
+3 PAGE Year: 1930; Census Place: Montgomery, Alabama; Enumeration District: 0000 (sample)
+1 RESI
+2 DATE 1940
+2 PLAC Montgomery, Montgomery, Alabama, USA
+2 AGE 10
+2 NOTE Attending school.
+2 SOUR @S5@
+3 PAGE Year: 1940; Census Place: Montgomery, Alabama; Sheet 4B (sample)
+1 OCCU Railroad porter, later postal clerk
+1 MILI
+2 DATE 1951
+2 PLAC Fort Jackson, South Carolina, USA
+2 NOTE U.S. Army, Korean War era.
+1 OBJE
+2 FILE photos/walter_hollis_1952.jpg
+2 FORM jpg
+2 TITL Walter in uniform
+1 NOTE Moved from Montgomery to Chicago in 1953 for work with the railroad.
+1 FAMC @F4@
+1 FAMS @F2@
+0 @I6@ INDI
+1 NAME Ruth Ann /Pruitt/
+1 SEX F
+1 BIRT
+2 DATE 11 SEP 1932
+2 PLAC Selma, Dallas, Alabama, USA
+2 SOUR @S8@
+1 DEAT
+2 DATE 19 MAY 2015
+2 PLAC Chicago, Cook, Illinois, USA
+1 BURI
+2 DATE 26 MAY 2015
+2 PLAC Lincoln Cemetery, Blue Island, Illinois, USA
+1 EDUC
+2 DATE 1954
+2 PLAC Alabama State College, Montgomery, Alabama
+2 NOTE Teaching certificate.
+1 FAMC @F5@
+1 FAMS @F2@
+0 @I7@ INDI
+1 NAME Clarence /Merriweather/
+1 SEX M
+1 BIRT
+2 DATE 5 APR 1925
+2 PLAC Opelousas, St. Landry, Louisiana, USA
+1 DEAT
+2 DATE 17 DEC 1990
+2 PLAC Houston, Harris, Texas, USA
+1 CENS
+2 DATE 1930
+2 PLAC Opelousas, St. Landry, Louisiana, USA
+2 AGE 5
+2 SOUR @S4@
+3 PAGE Year: 1930; Census Place: Opelousas, St. Landry, Louisiana (sample)
+1 MILI
+2 DATE 1943
+2 NOTE U.S. Navy, Steward's Branch.
+1 FAMC @F6@
+1 FAMS @F3@
+0 @I8@ INDI
+1 NAME Lillian Rose /Calloway/
+1 SEX F
+1 BIRT
+2 DATE ABT 1930
+2 PLAC Lafayette, Louisiana, USA
+1 DEAT
+2 DATE 2019
+2 PLAC Houston, Harris, Texas, USA
+1 FAMC @F7@
+1 FAMS @F3@
+0 @I9@ INDI
+1 NAME Samuel /Hollis/ Sr.
+1 SEX M
+1 BIRT
+2 DATE 3 MAR 1895
+2 PLAC Lowndes County, Alabama, USA
+1 DEAT
+2 DATE 12 NOV 1961
+2 PLAC Montgomery, Montgomery, Alabama, USA
+2 SOUR @S7@
+1 RESI
+2 DATE 1900
+2 PLAC Beat 5, Lowndes, Alabama, USA
+2 AGE 5
+2 NOTE Son in household of Isaac Hollis, farmer.
+2 SOUR @S1@
+3 PAGE Year: 1900; Census Place: Beat 5, Lowndes, Alabama; Page 12 (sample)
+1 RESI
+2 DATE 1910
+2 PLAC Beat 5, Lowndes, Alabama, USA
+2 AGE 15
+2 NOTE Farm laborer on the home farm.
+2 SOUR @S2@
+3 PAGE Year: 1910; Census Place: Beat 5, Lowndes, Alabama (sample)
+1 EVEN
+2 TYPE World War I draft registration
+2 DATE 5 JUN 1917
+2 PLAC Lowndes County, Alabama, USA
+2 NOTE Tall, medium build, brown eyes. Employer listed as Isaac Hollis.
+2 SOUR @S6@
+1 RESI
+2 DATE 1930
+2 PLAC Montgomery, Montgomery, Alabama, USA
+2 AGE 35
+2 NOTE Head of household; owns home; occupation laborer, lumber yard.
+2 SOUR @S4@
+3 PAGE Year: 1930; Census Place: Montgomery, Alabama (sample)
+1 OCCU Lumber yard foreman
+1 FAMC @F8@
+1 FAMS @F4@
+0 @I10@ INDI
+1 NAME Ida Mae /Stroud/
+1 SEX F
+1 BIRT
+2 DATE ABT 1899
+2 PLAC Hayneville, Lowndes, Alabama, USA
+1 DEAT
+2 DATE 1970
+2 PLAC Montgomery, Montgomery, Alabama, USA
+1 OBJE
+2 FILE
+2 TITL Ida Mae Stroud Hollis portrait
+1 FAMS @F4@
+0 @I11@ INDI
+1 NAME Albert /Pruitt/
+1 SEX M
+1 BIRT
+2 DATE 1900
+2 PLAC Selma, Dallas, Alabama, USA
+1 DEAT
+2 DATE 1958
+2 PLAC Selma, Dallas, Alabama, USA
+1 OCCU Blacksmith
+1 FAMS @F5@
+0 @I12@ INDI
+1 NAME Hattie /Bell/
+1 SEX F
+1 BIRT
+2 DATE 1904
+2 PLAC Dallas County, Alabama, USA
+1 DEAT
+2 DATE 1987
+2 PLAC Selma, Dallas, Alabama, USA
+1 FAMS @F5@
+0 @I13@ INDI
+1 NAME Joseph /Merriweather/
+1 SEX M
+1 BIRT
+2 DATE 1890
+2 PLAC St. Landry Parish, Louisiana, USA
+1 DEAT
+2 DATE 1944
+2 PLAC Opelousas, St. Landry, Louisiana, USA
+1 FAMS @F6@
+0 @I14@ INDI
+1 NAME Celestine /Benoit/
+1 SEX F
+1 BIRT
+2 DATE 1894
+2 PLAC Grand Coteau, St. Landry, Louisiana, USA
+1 DEAT
+2 DATE 1960
+2 PLAC Opelousas, St. Landry, Louisiana, USA
+1 RELI Catholic
+1 FAMS @F6@
+0 @I15@ INDI
+1 NAME Thomas /Calloway/
+1 SEX M
+1 BIRT
+2 DATE BET 1896 AND 1899
+2 PLAC Louisiana, USA
+1 DEAT
+2 DATE 1972
+1 FAMS @F7@
+0 @I16@ INDI
+1 NAME Isaac /Hollis/
+1 SEX M
+1 BIRT
+2 DATE ABT 1860
+2 PLAC Alabama, USA
+1 DEAT
+2 DATE 1921
+2 PLAC Lowndes County, Alabama, USA
+1 RESI
+2 DATE 1900
+2 PLAC Beat 5, Lowndes, Alabama, USA
+2 AGE 40
+2 NOTE Head of household; farmer; rents farm; can read and write.
+2 SOUR @S1@
+3 PAGE Year: 1900; Census Place: Beat 5, Lowndes, Alabama; Page 12 (sample)
+1 FAMS @F8@
+0 @I17@ INDI
+1 NAME Harriet /Wren/
+1 SEX F
+1 BIRT
+2 DATE ABT 1865
+2 PLAC Alabama, USA
+1 DEAT
+2 DATE AFT 1930
+1 FAMS @F8@
+0 @I18@ INDI
+1 NAME Samuel /Hollis/ Jr.
+1 SEX M
+1 BIRT
+2 DATE 1920
+2 PLAC Montgomery, Montgomery, Alabama, USA
+1 DEAT
+2 DATE 1981
+2 PLAC Detroit, Wayne, Michigan, USA
+1 FAMC @F4@
+0 @I19@ INDI
+1 NAME Opal /Hollis/
+1 SEX F
+1 BIRT
+2 DATE 1923
+2 PLAC Montgomery, Montgomery, Alabama, USA
+1 DEAT
+2 DATE 2010
+1 FAMC @F4@
+1 FAMS @F9@
+0 @I20@ INDI
+1 NAME Leon /Talbot/
+1 SEX M
+1 BIRT
+2 DATE 1921
+1 DEAT
+2 DATE 1999
+1 FAMS @F9@
+0 @I21@ INDI
+1 NAME Gloria /Talbot/
+1 SEX F
+1 BIRT
+2 DATE 7 JUL 1950
+2 PLAC Montgomery, Montgomery, Alabama, USA
+1 FAMC @F9@
+0 @I22@ INDI
+1 NAME Elijah /Stroud/
+1 SEX M
+1 BIRT
+2 DATE ABT 1870
+2 PLAC Alabama, USA
+1 NOTE Possible relative of Ida Mae Stroud. Not yet connected.
+0 @I23@ INDI
+1 NAME Mattie /Stroud/
+1 SEX F
+1 BIRT
+2 DATE ABT 1875
+0 @F1@ FAM
+1 HUSB @I3@
+1 WIFE @I4@
+1 CHIL @I1@
+1 CHIL @I2@
+1 MARR
+2 DATE 1986
+2 PLAC Chicago, Cook, Illinois, USA
+0 @F2@ FAM
+1 HUSB @I5@
+1 WIFE @I6@
+1 CHIL @I3@
+1 MARR
+2 DATE 20 AUG 1955
+2 PLAC Montgomery, Montgomery, Alabama, USA
+0 @F3@ FAM
+1 HUSB @I7@
+1 WIFE @I8@
+1 CHIL @I4@
+1 MARR
+2 DATE 1950
+2 PLAC Opelousas, St. Landry, Louisiana, USA
+0 @F4@ FAM
+1 HUSB @I9@
+1 WIFE @I10@
+1 CHIL @I18@
+1 CHIL @I19@
+1 CHIL @I5@
+1 MARR
+2 DATE ABT 1918
+2 PLAC Lowndes County, Alabama, USA
+0 @F5@ FAM
+1 HUSB @I11@
+1 WIFE @I12@
+1 CHIL @I6@
+0 @F6@ FAM
+1 HUSB @I13@
+1 WIFE @I14@
+1 CHIL @I7@
+1 MARR
+2 DATE 1919
+2 PLAC Grand Coteau, St. Landry, Louisiana, USA
+0 @F7@ FAM
+1 HUSB @I15@
+1 CHIL @I8@
+0 @F8@ FAM
+1 HUSB @I16@
+1 WIFE @I17@
+1 CHIL @I9@
+0 @F9@ FAM
+1 HUSB @I20@
+1 WIFE @I19@
+1 CHIL @I21@
+0 TRLR

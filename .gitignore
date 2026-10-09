@@ -1,0 +1,38 @@
+# Your settings and private family data: never commit these
+.env
+gedbook.toml
+config.local.*
+*.ged
+!examples/sample_family.ged
+media_matches*.csv
+book_output/
+my_book/
+photos/
+stories/*
+!stories/README.md
+fonts/*
+!fonts/README.md
+
+# DNA and health exports people sometimes keep next to a tree
+*DNA*.txt
+*dna*.txt
+*.vcf
+promethease*/
+
+# Audio, video, and transcripts of interviews with relatives
+*.mp3
+*.wav
+*.m4a
+*.mp4
+transcripts/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+build/
+dist/
+*.log

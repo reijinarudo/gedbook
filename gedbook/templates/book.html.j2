@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{ title }}</title>
+<meta name="author" content="{{ author }}">
+<meta name="generator" content="gedbook {{ version }}">
+<style>{{ css | safe }}</style>
+</head>
+<body class="{{ 'draft' if draft else 'final' }}">
+
+{# ---------- macros ---------- #}
+{% macro pref(r) -%}
+{%- if r -%}
+{%- if r.linked %}<a class="ref" href="{{ r.href }}">{{ r.name }}</a>{% else %}{{ r.name }}{% endif -%}
+{%- if r.lifespan %} <span class="life">({{ r.lifespan }})</span>{% endif -%}
+{%- else -%}<span class="unknown">unknown</span>{%- endif -%}
+{%- endmacro %}
+
+{% macro chart(rows) -%}
+<table class="pedigree">
+{% for row in rows %}<tr>
+{% for c in row %}<td rowspan="{{ c.span }}" class="g{{ c.gen }}">
+{% if c.person %}<div class="box"><span class="nm">{% if c.person.linked %}<a href="{{ c.person.href }}">{{ c.person.name }}</a>{% else %}{{ c.person.name }}{% endif %}</span>{% if c.person.lifespan %}<span class="ls">{{ c.person.lifespan }}</span>{% endif %}</div>
+{% else %}<div class="box empty">&nbsp;</div>{% endif %}
+</td>{% endfor %}
+</tr>{% endfor %}
+</table>
+{%- endmacro %}
+
+{% macro person_page(p, branch_title) -%}
+<section class="person" id="{{ p.anchor }}">
+  <header class="ph">
+    {% if p.number %}<span class="ahn">No. {{ p.number }}</span>{% endif %}
+    <h3>{{ p.name }}</h3>
+    {% if p.lifespan %}<div class="dates">{{ p.lifespan }}</div>{% endif %}
+  </header>
+  <div class="cols">
+    {% if p.photo %}
+    <figure class="portrait{{ ' review' if p.photo.review }}">
+      <img src="{{ p.photo.src }}" alt="{{ p.name }}">
+      {% if p.photo.caption %}<figcaption>{{ p.photo.caption }}</figcaption>{% endif %}
+      {% if draft and p.photo.review %}<figcaption class="flag">Photo match not yet confirmed</figcaption>{% endif %}
+    </figure>
+    {% endif %}
+    <div class="facts">
+      {% if p.facts %}
+      <table class="vital">
+        {% for f in p.facts %}<tr><th>{{ f.label }}</th><td>{{ f.date }}{% if f.date and f.place %}, {% endif %}{{ f.place }}{% if f.detail %}<div class="det">{{ f.detail }}</div>{% endif %}</td></tr>{% endfor %}
+      </table>
+      {% endif %}
+      {% if p.parents %}<p class="rel"><strong>Parents:</strong> {% for r in p.parents %}{{ pref(r) }}{% if not loop.last %} and {% endif %}{% endfor %}</p>{% endif %}
+      {% for u in p.unions %}
+      <p class="rel"><strong>Spouse:</strong> {{ pref(u.spouse) }}{% if u.date or u.place %}, married {{ u.date }}{% if u.date and u.place %}, {% endif %}{{ u.place }}{% endif %}</p>
+      {% if u.children %}<p class="rel kids"><strong>Children:</strong> {% for c in u.children %}{{ pref(c) }}{% if not loop.last %}; {% endif %}{% endfor %}</p>{% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% if p.story %}<div class="story">{{ p.story | safe }}</div>{% endif %}
+
+  {% if p.census %}
+  <h4>Census and residence records (transcribed)</h4>
+  <table class="census">
+    <thead><tr><th>Year</th><th>Place</th><th>Age</th><th>Details</th></tr></thead>
+    <tbody>{% for c in p.census %}<tr><td>{{ c.year }}</td><td>{{ c.place }}</td><td>{{ c.age }}</td><td>{{ c.detail }}{% if c.citation %}<div class="cit">{{ c.citation }}</div>{% endif %}</td></tr>{% endfor %}</tbody>
+  </table>
+  {% endif %}
+
+  {% if p.other %}
+  <h4>Life events</h4>
+  <table class="events">
+    {% for f in p.other %}<tr><th>{{ f.label }}</th><td>{{ f.date }}</td><td>{{ f.place }}{% if f.detail %}{% if f.place %}. {% endif %}{{ f.detail }}{% endif %}</td></tr>{% endfor %}
+  </table>
+  {% endif %}
+
+  {% if p.notes %}<h4>Notes from the tree</h4>{% for n in p.notes %}<p class="note">{{ n }}</p>{% endfor %}{% endif %}
+
+  {% if p.gallery %}
+  <div class="gallery">{% for g in p.gallery %}<figure class="{{ 'review' if g.review }}"><img src="{{ g.src }}" alt="{{ g.kind }}"><figcaption>{{ g.caption or g.kind|capitalize }}{% if draft and g.review %} (unconfirmed){% endif %}</figcaption></figure>{% endfor %}</div>
+  {% endif %}
+
+  {% if draft and p.prompts %}
+  <aside class="prompts"><div class="pl">Writer's prompts (draft only, not printed in the final build)</div>
+  <ul>{% for t, q in p.prompts %}<li><strong>{{ t }}.</strong> {{ q }}</li>{% endfor %}</ul></aside>
+  {% endif %}
+  {% if draft and not p.story and not p.restricted %}<aside class="prompts"><div class="pl">No story yet. Add one in stories/{{ p.id | replace('@','') }}.md</div></aside>{% endif %}
+
+  {% if p.sources %}<div class="sources"><strong>Sources cited in the tree:</strong> {{ p.sources | join('; ') }}</div>{% endif %}
+</section>
+{%- endmacro %}
+
+{% macro reg(node) -%}
+<li{% if node.home %} id="{{ node.person.href[1:] }}"{% endif %}>
+  <span class="rl">{{ node.label }}</span>
+  {% if node.home %}<strong>{{ node.person.name }}</strong>{% else %}<a class="ref" href="{{ node.person.href }}">{{ node.person.name }}</a>{% endif %}
+  {% if node.facts %}<span class="rf">{{ node.facts }}</span>{% elif node.person.lifespan %}<span class="life">({{ node.person.lifespan }})</span>{% endif %}
+  {% for s in node.spouses %}<div class="sp"{% if s.home %} id="{{ s.href[1:] }}"{% endif %}>m. {% if s.home %}{{ s.name }}{% else %}<a class="ref" href="{{ s.href }}">{{ s.name }}</a>{% endif %}{% if s.lifespan %} <span class="life">({{ s.lifespan }})</span>{% endif %}</div>{% endfor %}
+  {% if node.children %}<ol class="register">{% for c in node.children %}{{ reg(c) }}{% endfor %}</ol>{% endif %}
+</li>
+{%- endmacro %}
+
+{# ---------- front matter ---------- #}
+<section class="title-page">
+  <h1>{{ title }}</h1>
+  {% if subtitle %}<p class="subtitle">{{ subtitle }}</p>{% endif %}
+  <p class="by">Compiled by {{ author }}</p>
+  <p class="edition">{{ 'Working draft' if draft else 'Edition' }}, {{ date }}</p>
+</section>
+
+<section class="front" id="how-to-use">
+  <h2>How to use this book</h2>
+  {% if introduction %}{{ introduction | safe }}{% endif %}
+  <p>The book is organized by family branch. Each branch begins with one ancestor of {{ pref(root) }} and follows that ancestor's line backward, generation by generation, then lists that ancestor's descendants.</p>
+  <p><strong>Numbering.</strong> Ancestors carry Ahnentafel numbers. Number 1 is {{ root.name }}. A person's father is twice their number and their mother is twice their number plus one. Within a branch, numbers restart with the branch ancestor as 1. Descendant lists use outline numbers: 1.2.3 is the third child of the second child of the branch ancestor.</p>
+  <p><strong>Page references.</strong> A name followed by a page number points to that person's main entry.</p>
+  <p><strong>Standards of evidence.</strong> Facts come from the family tree file and the sources cited there. Records support or indicate conclusions, and later records can revise them. Where the tree is thin or sources disagree, treat the entry as a starting point for research. Census entries are transcribed as text.</p>
+  <p><strong>Living people.</strong> {% if living_mode == 'full' %}All details are shown.{% elif living_mode == 'year-only' %}For people who may be living (no death recorded and born within the last {{ living_threshold }} years), dates are reduced to the year.{% elif living_mode == 'private' %}People who may be living appear by name only.{% else %}People who may be living appear as "Living" with their surname.{% endif %}</p>
+  {% if draft %}<p class="draftnote">This is a working draft. Shaded boxes are notes for the writer and do not appear in the final build. Run the build with <code>--final</code> to remove them.</p>{% endif %}
+</section>
+
+<section class="front" id="master-chart">
+  <h2>The branches at a glance</h2>
+  {{ chart(master_chart) }}
+</section>
+
+<section class="front toc">
+  <h2>Contents</h2>
+  <ul>
+    {% if present %}<li><a href="#present">The present generations</a></li>{% endif %}
+    {% for b in branches %}<li><a href="#branch-{{ loop.index }}">The {{ b.title }} branch</a></li>{% endfor %}
+    <li><a href="#frontier">Research frontier</a></li>
+    <li><a href="#index">Index of names</a></li>
+  </ul>
+</section>
+
+{# ---------- present generations ---------- #}
+{% if present %}
+<section class="part" id="present">
+  <h1 class="part-title">The present generations</h1>
+  {% for p in present %}{{ person_page(p, 'The present generations') }}{% endfor %}
+</section>
+{% endif %}
+
+{# ---------- branches ---------- #}
+{% for b in branches %}
+<section class="part branch" id="branch-{{ loop.index }}">
+  <h1 class="part-title">The {{ b.title }} branch</h1>
+  <p class="branch-anchor">Branch ancestor: {{ pref(b.anchor) }}{% if b.number > 1 %}, No. {{ b.number }} in the ancestry of {{ root.name }}{% endif %}</p>
+  {% if b.intro %}<div class="story">{{ b.intro | safe }}</div>{% elif draft %}<aside class="prompts"><div class="pl">Branch introduction: add stories/branch-{{ b.anchor.id | replace('@','') }}.md</div></aside>{% endif %}
+  {{ chart(b.chart) }}
+  {% for gen, people in b.generations %}
+    <h2 class="gen">{% if gen == 0 %}The branch ancestor{% elif gen == 1 %}Parents{% elif gen == 2 %}Grandparents{% elif gen == 3 %}Great-grandparents{% else %}Generation {{ gen + 1 }}{% endif %}</h2>
+    {% for p in people %}{{ person_page(p, b.title) }}{% endfor %}
+  {% endfor %}
+  {% if b.register %}
+  <section class="descendants">
+    <h2 class="gen">Descendants of {{ b.anchor.name }}</h2>
+    <ol class="register top">{{ reg(b.register) }}</ol>
+  </section>
+  {% endif %}
+</section>
+{% endfor %}
+
+{# ---------- back matter ---------- #}
+<section class="part back" id="frontier">
+  <h1 class="part-title">Research frontier</h1>
+  {% if walls %}
+  <h2>Direct ancestors with no parents recorded</h2>
+  <p>Each of these lines stops here in the tree. They are the places where new research could extend the book.</p>
+  <ul class="cols2">{% for w in walls %}<li>{{ pref(w) }}</li>{% endfor %}</ul>
+  {% endif %}
+  {% if frontier %}
+  <h2>People in the tree with no recorded connection</h2>
+  <p>The tree holds {{ stats.not_connected }} people who do not connect to {{ root.name }} by blood or marriage. These are often research pools gathered while working on a brick wall. Surnames with counts:</p>
+  <ul class="cols3">{% for s, n in frontier %}<li>{{ s }} ({{ n }})</li>{% endfor %}</ul>
+  {% endif %}
+  <h2>About the data</h2>
+  <table class="stats">
+    <tr><th>People in the tree</th><td>{{ stats.individuals }}</td></tr>
+    <tr><th>Families</th><td>{{ stats.families }}</td></tr>
+    <tr><th>Direct ancestors found</th><td>{{ stats.direct_ancestors }} across {{ stats.ancestor_generations }} generations</td></tr>
+    <tr><th>Connected by blood or marriage</th><td>{{ stats.connected }}</td></tr>
+    <tr><th>Full entries / register entries</th><td>{{ stats.tier1_pages }} / {{ stats.tier2_entries }}</td></tr>
+  </table>
+  <p class="corrections">Corrections and additions are welcome. Each printing can carry an updated edition.</p>
+</section>
+
+<section class="part back" id="index">
+  <h1 class="part-title">Index of names</h1>
+  <div class="index">
+  {% for letter, items in letters %}
+    <h3>{{ letter }}</h3>
+    {% for i in items %}<div class="ix"><a href="{{ i.href }}">{{ i.name }}{% if i.lifespan %} ({{ i.lifespan }}){% endif %}</a></div>{% endfor %}
+  {% endfor %}
+  </div>
+</section>
+
+</body>
+</html>

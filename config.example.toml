@@ -1,0 +1,24 @@
+# Copy to gedbook.toml (ignored by git) and edit. Command-line options override these.
+
+gedcom = "path/to/your_tree.ged"   # exported from Ancestry, FamilySearch, RootsMagic, Gramps, etc.
+media = "path/to/your_photos"      # folder of images; subfolders are searched
+matches = "book_output/media_matches.csv"  # the match sheet after you review it
+stories = "stories"                # your own writing, one Markdown file per person
+out = "book_output"
+
+root = "I1"                        # ID of the book's root person (gedbook find ... to look it up)
+# root_name = "Jordan Avery Hollis" # or a unique full name
+
+branch_generation = 2   # 1 = parents (2 branches), 2 = grandparents (4), 3 = great-grandparents (8)
+descendant_depth = 4    # generations of descendants listed under each branch ancestor
+max_generations = 12    # how far back to follow direct ancestors
+
+living = "year-only"    # full | year-only | private | hidden
+living_years = 100      # no death recorded and born within this many years = possibly living
+
+title = "The Family of ..."
+subtitle = "A family history"
+author = "Your Name"
+
+final = false           # true hides writer's prompts and photo review flags
+color = false           # true keeps photos in color (default prints grayscale)
