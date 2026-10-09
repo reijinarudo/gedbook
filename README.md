@@ -44,8 +44,8 @@ Your family tree program only needs to export GEDCOM 5.5 or 5.5.1. Ancestry, Fam
 1. Get the code.
 
    ```
-   git clone https://github.com/USERNAME/genealogy-book-project.git
-   cd genealogy-book-project
+   git clone https://github.com/reijinarudo/gedbook.git
+   cd gedbook
    ```
 
 2. Create a virtual environment and install.
@@ -168,7 +168,7 @@ Family trees hold information about living people. Before you share a PDF or pus
 ## Project layout
 
 ```
-genealogy-book-project/
+gedbook/
   gedbook/
     cli.py           commands: stats, find, match, build
     gedcom.py        GEDCOM reader (no outside dependencies)
